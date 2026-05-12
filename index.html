@@ -50,7 +50,7 @@
     background:var(--bg);
     color:var(--ink);
     font-family:var(--sans);
-    font-weight:300;
+    font-weight:400;
     line-height:1.6;
     overflow-x:hidden;
   }
@@ -90,7 +90,7 @@
   }
   .section-title{
     font-family:var(--serif);
-    font-weight:300;
+    font-weight:400;
     font-size:clamp(36px,5vw,64px);
     text-align:center;
     letter-spacing:0.04em;
@@ -263,7 +263,7 @@
   @keyframes flourishDraw{to{stroke-dashoffset:0}}
 
   .hero-names{
-    font-family:var(--serif);font-weight:300;
+    font-family:var(--serif);font-weight:400;
     font-size:clamp(40px,6vw,82px);
     letter-spacing:0.04em;
     background:linear-gradient(180deg,#f9e8c4 0%,#d4af6a 70%,#8a6f43 100%);
@@ -293,7 +293,7 @@
   .countdown-num{
     font-family:var(--serif);
     font-size:clamp(36px,5vw,64px);
-    font-weight:300;
+    font-weight:400;
     color:var(--gold-light);
     line-height:1;
     font-variant-numeric:tabular-nums;
@@ -352,7 +352,7 @@
     box-shadow:0 30px 80px rgba(0,0,0,0.5);
   }
   .cal-month{
-    font-family:var(--serif);font-size:24px;font-weight:300;
+    font-family:var(--serif);font-size:24px;font-weight:400;
     color:var(--gold);letter-spacing:0.3em;
     text-transform:uppercase;
     margin-bottom:12px;
@@ -433,7 +433,7 @@
     margin-bottom:14px;
   }
   .couple-name{
-    font-family:var(--serif);font-weight:300;
+    font-family:var(--serif);font-weight:400;
     font-size:clamp(28px,3.6vw,42px);
     color:var(--ink);
     letter-spacing:0.03em;
@@ -516,7 +516,7 @@
   }
   .story-year{
     font-family:var(--serif);
-    font-size:32px;color:var(--gold);font-weight:300;
+    font-size:32px;color:var(--gold);font-weight:400;
     letter-spacing:0.06em;
     line-height:1;margin-bottom:8px;
   }
@@ -528,7 +528,7 @@
     margin-bottom:14px;
   }
   .story-title{
-    font-family:var(--serif);font-weight:300;
+    font-family:var(--serif);font-weight:400;
     font-size:22px;color:var(--ink);
     letter-spacing:0.02em;
     margin-bottom:6px;
@@ -603,7 +603,7 @@
     font-size:34px;color:var(--gold);margin-bottom:12px;line-height:1;
   }
   .event-card-name{
-    font-family:var(--serif);font-weight:300;
+    font-family:var(--serif);font-weight:400;
     font-size:24px;color:var(--ink);
     letter-spacing:0.04em;
     margin-bottom:6px;
@@ -634,7 +634,7 @@
     margin-bottom:3px;
   }
   .event-row-value{
-    font-family:var(--serif);font-weight:300;
+    font-family:var(--serif);font-weight:400;
     color:var(--ink);font-size:16px;
     line-height:1.4;
   }
@@ -880,7 +880,7 @@
     margin-bottom:14px;
   }
   .gift-name{
-    font-family:var(--serif);font-weight:300;
+    font-family:var(--serif);font-weight:400;
     font-size:22px;color:var(--ink);
     margin-bottom:20px;letter-spacing:0.04em;
   }
@@ -957,7 +957,7 @@
     text-transform:uppercase;margin-bottom:20px;
   }
   .live-time{
-    font-family:var(--serif);font-weight:300;
+    font-family:var(--serif);font-weight:400;
     font-size:32px;color:var(--gold);
     letter-spacing:0.05em;margin-bottom:8px;
   }
@@ -984,7 +984,7 @@
     margin-bottom:20px;line-height:1;
   }
   .upload-title{
-    font-family:var(--serif);font-weight:300;
+    font-family:var(--serif);font-weight:400;
     font-size:22px;color:var(--ink);
     margin-bottom:14px;letter-spacing:0.03em;
   }
@@ -1042,42 +1042,48 @@
      ════════════════════════════════════════════════════ */
 
   :root{
-    --bg:#faf6ed;
-    --bg-alt:#f3ebda;
+    --bg:#fbf7ed;                        /* slightly brighter cream */
+    --bg-alt:#f5ecd6;                    /* warm cream, more separation */
     --bg-soft:#fdfaf3;
-    --bg-dark:#1a1208;
-    --ink:#1f160a;                       /* darker for full contrast */
-    --ink-dim:rgba(31,22,10,0.88);       /* much higher opacity */
-    --ink-faded:rgba(31,22,10,0.65);
-    --gold:#9c7a3d;                      /* darker gold for readable text */
-    --gold-light:#c9a063;
-    --gold-dim:#6b4f25;
-    --rose:#a14751;                      /* darker rose, readable */
-    --red:#a01e2a;
+    --bg-card:#ffffff;                   /* pure white for content cards */
+    --bg-dark:#1a0f04;
+    --ink:#0d0805;                       /* near-solid black with warm tint */
+    --ink-strong:#000000;
+    --ink-dim:rgba(13,8,5,0.92);         /* still essentially dark */
+    --ink-secondary:rgba(13,8,5,0.78);
+    --ink-faded:rgba(13,8,5,0.62);
+    --gold:#7a5a25;                      /* dark gold readable as body */
+    --gold-bright:#c9a063;               /* bright gold for dark-bg accents only */
+    --gold-dim:#4a3815;                  /* darkest gold for titles */
+    --rose:#7a2832;                      /* deep rose */
+    --red:#8a1a24;                       /* deep red */
   }
+  /* Boost typography weight globally for cream bg */
+  body{font-weight:400}
+  h1,h2,h3,h4,h5,h6{font-weight:500}
   html, body{background:var(--bg);color:var(--ink)}
   ::selection{background:var(--gold);color:#fff}
 
-  /* Section backgrounds alternate */
+  /* Section backgrounds - clear alternation between cream and warm cream */
   section{background:var(--bg)}
   #savedate{background:linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%)}
   #couple{background:var(--bg-alt)}
   #story{background:var(--bg)}
   #invitation{
     background:
-      radial-gradient(ellipse at top, rgba(184,146,79,0.08), transparent 70%),
+      radial-gradient(ellipse at top, rgba(122,90,37,0.06), transparent 70%),
       var(--bg-soft);
   }
   #schedule{background:var(--bg-alt)}
   #dresscode{
-    background:linear-gradient(180deg, var(--bg-alt) 0%, #f8e8d8 100%);
+    background:linear-gradient(180deg, var(--bg-alt) 0%, #f5d8c4 100%);
   }
   #gallery{background:var(--bg)}
   #rsvp{background:var(--bg-alt)}
   #gift{background:var(--bg)}
   #guestbook{background:var(--bg-alt)}
   #livestream{
-    background:linear-gradient(180deg, var(--bg) 0%, #f8dfd9 100%);
+    background:linear-gradient(180deg, var(--bg) 0%, #f5d4cf 100%);
   }
   #photoupload{background:var(--bg)}
 
@@ -1102,14 +1108,16 @@
   .countdown-sep{color:var(--gold-dim)}
   .scroll-cue{color:rgba(255,235,210,0.5)}
 
-  /* Section titles - readable gold gradient on light bg */
+  /* Section titles - solid dark gold for maximum readability */
   .section-title{
-    background:linear-gradient(180deg, var(--gold) 0%, var(--gold-dim) 100%);
-    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-    text-shadow:none;
+    background:none;
+    -webkit-text-fill-color:initial;
+    color:var(--gold-dim);
+    font-weight:500;
+    text-shadow:0 1px 0 rgba(255,255,255,0.6);
   }
-  .section-subtitle{color:var(--ink);opacity:0.78;font-weight:400}
-  .section-label{color:var(--gold);font-weight:500}
+  .section-subtitle{color:var(--ink);opacity:0.85;font-weight:400}
+  .section-label{color:var(--gold);font-weight:600;letter-spacing:0.5em}
 
   /* Calendar */
   .calendar{
