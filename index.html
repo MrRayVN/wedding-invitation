@@ -16,7 +16,9 @@
 <!-- PWA -->
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="https://mrrayvn.github.io/wedding-slideshow/slide_01_Cover_Album.jpg">
-<link rel="icon" type="image/jpeg" href="https://mrrayvn.github.io/wedding-slideshow/slide_01_Cover_Album.jpg">
+
+<!-- Custom SVG favicon (Đ & Q monogram) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f9e8c4'/%3E%3Cstop offset='100%25' stop-color='%238a6f43'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' fill='%23050407'/%3E%3Ctext x='18' y='44' font-family='Georgia,serif' font-size='32' font-style='italic' fill='url(%23g)' text-anchor='middle'%3EĐ%3C/text%3E%3Ctext x='46' y='42' font-family='Georgia,serif' font-size='28' font-style='italic' fill='url(%23g)' text-anchor='middle'%3EQ%3C/text%3E%3C/svg%3E">
 
 <!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1034,6 +1036,193 @@
     margin-bottom:20px;
   }
 
+  /* ════════════════════════════════════════════════════
+     ════════════ TUYỆT ĐỈNH v2 UPGRADES ════════════════
+     ════════════════════════════════════════════════════ */
+
+  /* === Scroll progress bar === */
+  .scroll-progress{
+    position:fixed;top:0;left:0;height:3px;
+    background:linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-light));
+    width:0%;z-index:100;
+    box-shadow:0 0 14px var(--gold);
+    transition:width 0.1s linear;
+  }
+
+  /* === Hero particles canvas === */
+  .hero-particles{
+    position:absolute;inset:0;z-index:3;
+    pointer-events:none;
+  }
+
+  /* === Cursor gold trail === */
+  .cursor-trail{
+    position:fixed;
+    width:8px;height:8px;border-radius:50%;
+    background:radial-gradient(circle, rgba(255,219,153,0.95), transparent 70%);
+    pointer-events:none;
+    z-index:9999;
+    transform:translate(-50%,-50%);
+    transition:opacity 0.6s ease;
+    will-change:transform, opacity;
+  }
+
+  /* === 3D Tilt cards === */
+  .event-card{
+    transform-style:preserve-3d;
+    transition:transform 0.3s cubic-bezier(.2,.7,.3,1), box-shadow 0.3s, border-color 0.3s;
+  }
+  .event-card:hover{
+    transform:translateY(-6px) perspective(800px);
+  }
+
+  /* === Confetti canvas === */
+  .confetti-canvas{
+    position:fixed;inset:0;z-index:9998;pointer-events:none;
+  }
+
+  /* === Lightbox === */
+  .lightbox{
+    position:fixed;inset:0;z-index:9000;
+    background:rgba(0,0,0,0.95);
+    backdrop-filter:blur(12px);
+    display:none;
+    align-items:center;justify-content:center;
+    opacity:0;transition:opacity 0.4s;
+  }
+  .lightbox.show{display:flex;opacity:1}
+  .lightbox-img{
+    max-width:92vw;max-height:88vh;
+    object-fit:contain;
+    box-shadow:0 30px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(212,175,106,0.2);
+    animation:lightboxIn 0.5s cubic-bezier(.2,.7,.3,1);
+  }
+  @keyframes lightboxIn{
+    from{opacity:0;transform:scale(0.85)}
+    to{opacity:1;transform:scale(1)}
+  }
+  .lightbox-close{
+    position:absolute;top:24px;right:24px;
+    width:44px;height:44px;border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(212,175,106,0.3);
+    color:var(--ink);
+    font-size:24px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all 0.3s;
+  }
+  .lightbox-close:hover{background:var(--gold);color:#1a1208;border-color:var(--gold)}
+  .lightbox-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:54px;height:54px;border-radius:50%;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(212,175,106,0.25);
+    color:var(--ink);
+    font-size:28px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all 0.3s;
+  }
+  .lightbox-nav:hover{background:var(--gold);color:#1a1208}
+  .lightbox-nav.prev{left:24px}
+  .lightbox-nav.next{right:24px}
+  .lightbox-counter{
+    position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+    font-family:var(--italic);font-style:italic;
+    color:var(--gold);letter-spacing:0.4em;font-size:13px;
+  }
+
+  /* === Add to Calendar button === */
+  .event-calendar-btn{
+    display:flex;align-items:center;justify-content:center;
+    gap:8px;
+    padding:12px;
+    background:rgba(212,175,106,0.03);
+    border-top:1px solid rgba(212,175,106,0.1);
+    color:var(--gold-dim);
+    font-family:var(--italic);font-style:italic;
+    font-size:12px;letter-spacing:0.25em;text-transform:uppercase;
+    cursor:pointer;
+    transition:all 0.3s;
+    border-bottom:0;
+  }
+  .event-calendar-btn:hover{color:var(--gold);background:rgba(212,175,106,0.08)}
+  .event-calendar-btn svg{width:14px;height:14px;fill:currentColor}
+
+  /* === Share buttons === */
+  .share-row{
+    display:flex;justify-content:center;gap:14px;
+    margin:30px 0 20px;
+    flex-wrap:wrap;
+  }
+  .share-btn{
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(212,175,106,0.2);
+    color:var(--ink-dim);
+    cursor:pointer;
+    transition:all 0.3s;
+    text-decoration:none;
+  }
+  .share-btn:hover{
+    transform:translateY(-3px);
+    background:var(--gold);color:#1a1208;border-color:var(--gold);
+    box-shadow:0 12px 30px rgba(212,175,106,0.3);
+  }
+  .share-btn svg{width:18px;height:18px;fill:currentColor}
+  .share-label{
+    text-align:center;
+    font-family:var(--italic);font-style:italic;
+    color:var(--ink-faded);
+    letter-spacing:0.4em;
+    font-size:11px;text-transform:uppercase;
+    margin-bottom:8px;
+  }
+
+  /* === Typewriter cursor === */
+  .typewriter::after{
+    content:'|';
+    color:var(--gold);
+    animation:blink 1s steps(2) infinite;
+    margin-left:2px;
+  }
+  @keyframes blink{50%{opacity:0}}
+
+  /* === Heart float animation === */
+  @keyframes heartFloat{
+    0%{transform:translateY(0) translateX(0) rotate(0); opacity:0}
+    10%{opacity:0.8}
+    100%{transform:translateY(-110vh) translateX(var(--drift,0)) rotate(var(--rot,360deg)); opacity:0}
+  }
+
+  /* === Easter egg confetti hint === */
+  .easter-hint{
+    position:fixed;bottom:14px;left:14px;
+    color:rgba(212,175,106,0.2);font-size:10px;
+    font-family:var(--italic);font-style:italic;
+    letter-spacing:0.2em;z-index:50;
+    pointer-events:none;user-select:none;
+  }
+
+  /* Hide cursor trail on touch devices */
+  @media (hover:none){
+    .cursor-trail{display:none}
+  }
+
+  /* === Print styles (print-friendly) === */
+  @media print{
+    .grain, .hero-particles, .nav-mini, .music-toggle, .scroll-cue,
+    .scroll-progress, .cursor-trail, .countdown, .scroll-cue,
+    .event-calendar-btn, .form-submit, .share-row, .share-label{display:none !important}
+    body, section{background:#fff !important;color:#000 !important;padding:20px}
+    .section-title, .hero-names, .couple-name, .story-year{
+      background:none !important;-webkit-text-fill-color:#1a1208 !important;color:#1a1208 !important;
+    }
+    .gift-card, .event-card, .calendar{
+      border:1px solid #8a6f43 !important;background:#fff !important;
+    }
+  }
+
   /* ==================== MOBILE ==================== */
   @media (max-width: 768px){
     section{padding:80px 22px}
@@ -1060,8 +1249,10 @@
 </head>
 <body>
 
-<!-- ============ GRAIN OVERLAY ============ -->
+<!-- ============ SCROLL PROGRESS + GRAIN ============ -->
+<div class="scroll-progress" id="scrollProgress"></div>
 <div class="grain"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
 
 <!-- ============ NAVIGATION ============ -->
 <nav class="nav-mini" id="navMini">
@@ -1081,9 +1272,10 @@
 
 <!-- ============ HERO ============ -->
 <section id="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-leak"></div>
+  <canvas class="hero-particles" id="heartCanvas"></canvas>
 
   <div class="hero-inner">
     <div class="hero-greeting">Trân Trọng Kính Mời</div>
@@ -1309,6 +1501,10 @@
           <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
           Xem trên Google Maps
         </a>
+        <button class="event-calendar-btn" data-cal-id="0">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Thêm vào lịch
+        </button>
       </div>
 
       <div class="event-card reveal reveal-delay-1">
@@ -1344,6 +1540,10 @@
           <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
           Xem trên Google Maps
         </a>
+        <button class="event-calendar-btn" data-cal-id="1">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Thêm vào lịch
+        </button>
       </div>
 
       <div class="event-card reveal reveal-delay-2">
@@ -1379,6 +1579,10 @@
           <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
           Xem trên Google Maps
         </a>
+        <button class="event-calendar-btn" data-cal-id="2">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Thêm vào lịch
+        </button>
       </div>
 
       <div class="event-card reveal reveal-delay-3">
@@ -1414,6 +1618,10 @@
           <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
           Xem trên Google Maps
         </a>
+        <button class="event-calendar-btn" data-cal-id="3">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Thêm vào lịch
+        </button>
       </div>
 
     </div>
@@ -1663,6 +1871,26 @@
   <div class="footer-thanks">Cảm ơn quý vị</div>
   <div class="footer-monogram">Đ &amp; Q</div>
   <div class="footer-hashtag">#TanDatLeQuyen · #DatQuyen15052026</div>
+
+  <div class="share-label">Chia sẻ thiệp mời</div>
+  <div class="share-row">
+    <a class="share-btn" href="#" data-share="zalo" title="Chia sẻ Zalo">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 4.7 0 10.5c0 3.4 1.9 6.4 4.8 8.3-.2.7-.7 2.4-.8 2.8 0 0-.1.3.1.4.2.1.4 0 .4 0 .4-.1 4.1-2.7 4.8-3.1 1 .2 2 .3 3 .3 6.6 0 12-4.7 12-10.5C24 4.7 18.6 0 12 0z"/></svg>
+    </a>
+    <a class="share-btn" href="#" data-share="facebook" title="Chia sẻ Facebook">
+      <svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.6 0 12 0S0 5.4 0 12.07c0 6 4.4 11 10.1 11.9v-8.4H7.1v-3.5h3v-2.7c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 1-2 1.9v2.3h3.3l-.5 3.5h-2.8v8.4c5.7-.9 10.2-5.9 10.2-11.9z"/></svg>
+    </a>
+    <a class="share-btn" href="#" data-share="messenger" title="Chia sẻ Messenger">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 4.97 0 11.11c0 3.49 1.74 6.61 4.47 8.65V24l4.09-2.24c1.09.3 2.24.46 3.44.46 6.63 0 12-4.97 12-11.11C24 4.97 18.63 0 12 0zm1.19 14.95l-3.06-3.26-5.97 3.26L10.73 8l3.13 3.26L19.77 8l-6.58 6.95z"/></svg>
+    </a>
+    <a class="share-btn" href="#" data-share="whatsapp" title="Chia sẻ WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5 0 1.5 1.1 2.9 1.2 3.1.1.2 2.1 3.3 5.2 4.6 1.9.8 2.6.9 3.6.7.6-.1 1.7-.7 2-1.4.2-.6.2-1.2.2-1.4 0-.1-.3-.2-.6-.3zM12 .8C5.8.8.8 5.8.8 12c0 2 .5 3.9 1.5 5.6L.7 23.2l5.7-1.5c1.6.9 3.5 1.4 5.6 1.4 6.2 0 11.2-5 11.2-11.2C23.2 5.8 18.2.8 12 .8zm0 20.5c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10z"/></svg>
+    </a>
+    <a class="share-btn" href="#" data-share="copy" title="Copy link">
+      <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+    </a>
+  </div>
+
   <div class="footer-contact">
     <a href="tel:0935831463">📞 Tấn Đạt · 093.583.1463</a>
     <a href="tel:0966610541">📞 Lệ Quyên · 096.6610.541</a>
@@ -1670,7 +1898,22 @@
   <div class="footer-signature">— With Love · Khánh Hòa · 15.05.2026 —</div>
 </footer>
 
-<!-- Background music (5 tracks from slideshow) -->
+<!-- Lightbox modal -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">&times;</button>
+  <button class="lightbox-nav prev" id="lbPrev">‹</button>
+  <img class="lightbox-img" id="lbImg" alt="">
+  <button class="lightbox-nav next" id="lbNext">›</button>
+  <div class="lightbox-counter" id="lbCounter"></div>
+</div>
+
+<!-- Confetti canvas -->
+<canvas class="confetti-canvas" id="confettiCanvas"></canvas>
+
+<!-- Easter egg hint -->
+<div class="easter-hint">↑↑↓↓←→←→ba</div>
+
+<!-- Background music -->
 <audio id="bgm" loop preload="none">
   <source src="https://mrrayvn.github.io/wedding-slideshow/02-50-nam-ve-sau.mp3" type="audio/mpeg">
 </audio>
@@ -1826,6 +2069,7 @@
       });
       if(res.ok){
         document.getElementById('gbSuccess').classList.add('show');
+        fireConfetti({ hearts: true });
       } else {
         alert('Có lỗi xảy ra. Vui lòng thử lại.');
       }
@@ -1833,6 +2077,390 @@
       alert('Có lỗi mạng. Vui lòng thử lại.');
     }
   });
+
+  // ════════════════════════════════════════════════════
+  // ══════════════ TUYỆT ĐỈNH v2 LOGIC ═════════════════
+  // ════════════════════════════════════════════════════
+
+  // === Scroll progress bar ===
+  const scrollProgress = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (window.scrollY / scrollable) * 100;
+    scrollProgress.style.width = pct + '%';
+  }, { passive: true });
+
+  // === Hero parallax (multi-layer) ===
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY < window.innerHeight){
+      heroBg.style.transform = `scale(1.1) translateY(${window.scrollY * 0.3}px)`;
+    }
+  }, { passive: true });
+
+  // === Hearts falling on hero ===
+  const heartCanvas = document.getElementById('heartCanvas');
+  const heartCtx = heartCanvas.getContext('2d');
+  let hearts = [];
+  function resizeHeartCanvas(){
+    const hero = document.getElementById('hero');
+    heartCanvas.width = hero.offsetWidth;
+    heartCanvas.height = hero.offsetHeight;
+  }
+  resizeHeartCanvas();
+  window.addEventListener('resize', resizeHeartCanvas);
+
+  function spawnHeart(){
+    hearts.push({
+      x: Math.random() * heartCanvas.width,
+      y: heartCanvas.height + 30,
+      size: 10 + Math.random() * 14,
+      vy: 0.3 + Math.random() * 0.6,
+      vx: (Math.random() - 0.5) * 0.4,
+      rot: Math.random() * Math.PI,
+      vrot: (Math.random() - 0.5) * 0.02,
+      opacity: 0.5 + Math.random() * 0.4,
+      hue: Math.random() < 0.5 ? '#ffd76b' : '#ff9bbc'
+    });
+  }
+  function drawHearts(){
+    heartCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
+    hearts = hearts.filter(h => h.y > -40);
+    hearts.forEach(h => {
+      h.y -= h.vy;
+      h.x += h.vx;
+      h.rot += h.vrot;
+      heartCtx.save();
+      heartCtx.translate(h.x, h.y);
+      heartCtx.rotate(h.rot);
+      heartCtx.globalAlpha = h.opacity;
+      heartCtx.fillStyle = h.hue;
+      heartCtx.shadowColor = h.hue;
+      heartCtx.shadowBlur = 8;
+      // Heart shape using two arcs and a triangle
+      const s = h.size;
+      heartCtx.beginPath();
+      heartCtx.moveTo(0, s/4);
+      heartCtx.bezierCurveTo(s/2, -s/2, s, 0, 0, s);
+      heartCtx.bezierCurveTo(-s, 0, -s/2, -s/2, 0, s/4);
+      heartCtx.fill();
+      heartCtx.restore();
+    });
+    requestAnimationFrame(drawHearts);
+  }
+  setInterval(() => { if(hearts.length < 18) spawnHeart(); }, 800);
+  drawHearts();
+
+  // === Cursor gold trail (desktop only) ===
+  const cursorTrail = document.getElementById('cursorTrail');
+  let trailX = 0, trailY = 0, mouseX = 0, mouseY = 0;
+  let trailDots = [];
+  if(window.matchMedia('(hover:hover)').matches){
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      // Spawn trail dots
+      if(Math.random() < 0.3){
+        const dot = document.createElement('div');
+        dot.className = 'cursor-trail';
+        dot.style.left = e.clientX + 'px';
+        dot.style.top  = e.clientY + 'px';
+        dot.style.opacity = '0.8';
+        document.body.appendChild(dot);
+        setTimeout(() => { dot.style.opacity = '0'; }, 50);
+        setTimeout(() => dot.remove(), 700);
+      }
+    });
+    function animTrail(){
+      trailX += (mouseX - trailX) * 0.18;
+      trailY += (mouseY - trailY) * 0.18;
+      cursorTrail.style.left = trailX + 'px';
+      cursorTrail.style.top  = trailY + 'px';
+      requestAnimationFrame(animTrail);
+    }
+    animTrail();
+  } else {
+    cursorTrail.style.display = 'none';
+  }
+
+  // === 3D Tilt on event cards ===
+  document.querySelectorAll('.event-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `translateY(-6px) perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 4}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  // === Add to Calendar (.ics) ===
+  const EVENTS = [
+    {
+      title: 'Lễ Vu Quy · Tấn Đạt & Lệ Quyên',
+      start: '20260515T080000',
+      end:   '20260515T100000',
+      location: 'Thôn Phú Hậu, xã Suối Hiệp, Khánh Hòa',
+      description: 'Lễ Vu Quy của Lưu Thị Lệ Quyên\\n\\nhttps://maps.app.goo.gl/hqP9osfFfWmjFRTs5'
+    },
+    {
+      title: 'Lễ Thành Hôn · Tấn Đạt & Lệ Quyên',
+      start: '20260515T103000',
+      end:   '20260515T113000',
+      location: 'TDP Đại Cát 1, Phường Ninh Hòa, Khánh Hòa',
+      description: 'Lễ Thành Hôn của Nguyễn Lê Tấn Đạt & Lưu Thị Lệ Quyên\\n\\nhttps://maps.app.goo.gl/ETD5YvqyYyZNF9PZ8'
+    },
+    {
+      title: 'Tiệc Cưới Nhà Trai · Tấn Đạt & Lệ Quyên',
+      start: '20260515T110000',
+      end:   '20260515T140000',
+      location: 'Trung Tâm Hội Nghị Tiệc Cưới Riverside, Khánh Hòa',
+      description: 'Tiệc đãi khách của Tấn Đạt & Lệ Quyên\\n\\nhttps://maps.app.goo.gl/3qGWkbkqwoS3qe4e6'
+    },
+    {
+      title: 'Tiệc Cưới Nhà Gái · Tấn Đạt & Lệ Quyên',
+      start: '20260516T110000',
+      end:   '20260516T140000',
+      location: 'Trung Tâm Tiệc Cưới Phúc Thịnh An, Khánh Hòa',
+      description: 'Tiệc đãi khách của Tấn Đạt & Lệ Quyên\\n\\nhttps://maps.app.goo.gl/WGxtBLEhiNTKfyyC9'
+    }
+  ];
+  function makeICS(ev){
+    return [
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//DatQuyen Wedding//VN',
+      'BEGIN:VEVENT',
+      `UID:${ev.start}-datquyen@wedding`,
+      `DTSTAMP:${ev.start}Z`,
+      `DTSTART;TZID=Asia/Ho_Chi_Minh:${ev.start}`,
+      `DTEND;TZID=Asia/Ho_Chi_Minh:${ev.end}`,
+      `SUMMARY:${ev.title}`,
+      `LOCATION:${ev.location}`,
+      `DESCRIPTION:${ev.description}`,
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+  }
+  document.querySelectorAll('.event-calendar-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = parseInt(btn.dataset.calId, 10);
+      const ev = EVENTS[id];
+      const blob = new Blob([makeICS(ev)], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = ev.title.replace(/[·\s]+/g,'_') + '.ics';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+  });
+
+  // === Share buttons ===
+  const SHARE_URL = window.location.href;
+  const SHARE_TEXT = 'Trân trọng kính mời Quý vị đến chung vui trong Lễ Thành Hôn của Tấn Đạt & Lệ Quyên · 15.05.2026';
+  document.querySelectorAll('[data-share]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const type = btn.dataset.share;
+      const enc = encodeURIComponent;
+      let url = '';
+      switch(type){
+        case 'zalo':
+          url = `https://zalo.me/share/link?url=${enc(SHARE_URL)}&title=${enc(SHARE_TEXT)}`;
+          break;
+        case 'facebook':
+          url = `https://www.facebook.com/sharer/sharer.php?u=${enc(SHARE_URL)}`;
+          break;
+        case 'messenger':
+          url = `https://www.facebook.com/dialog/send?app_id=291494419107518&link=${enc(SHARE_URL)}&redirect_uri=${enc(SHARE_URL)}`;
+          break;
+        case 'whatsapp':
+          url = `https://wa.me/?text=${enc(SHARE_TEXT + ' ' + SHARE_URL)}`;
+          break;
+        case 'copy':
+          navigator.clipboard.writeText(SHARE_URL).then(() => {
+            const orig = btn.innerHTML;
+            btn.innerHTML = '✓';
+            btn.style.background = 'var(--gold)';
+            btn.style.color = '#1a1208';
+            setTimeout(() => { btn.innerHTML = orig; btn.style = ''; }, 1800);
+          });
+          return;
+      }
+      if(url) window.open(url, '_blank', 'width=580,height=460');
+    });
+  });
+
+  // === Photo Lightbox ===
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCounter = document.getElementById('lbCounter');
+  const galleryImgs = Array.from(document.querySelectorAll('.gallery-grid .g-item img'));
+  let lbIdx = 0;
+  function openLightbox(idx){
+    lbIdx = idx;
+    lbImg.src = galleryImgs[idx].src;
+    lbCounter.textContent = `${idx + 1} / ${galleryImgs.length}`;
+    lightbox.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  function navLightbox(delta){
+    lbIdx = (lbIdx + delta + galleryImgs.length) % galleryImgs.length;
+    lbImg.src = galleryImgs[lbIdx].src;
+    lbCounter.textContent = `${lbIdx + 1} / ${galleryImgs.length}`;
+  }
+  galleryImgs.forEach((img, i) => img.parentElement.addEventListener('click', () => openLightbox(i)));
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', () => navLightbox(-1));
+  document.getElementById('lbNext').addEventListener('click', () => navLightbox(1));
+  lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if(!lightbox.classList.contains('show')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') navLightbox(-1);
+    if(e.key === 'ArrowRight') navLightbox(1);
+  });
+
+  // === Typewriter for hero greeting ===
+  const greetEl = document.querySelector('.hero-greeting');
+  if(greetEl){
+    const text = greetEl.textContent;
+    greetEl.textContent = '';
+    greetEl.classList.add('typewriter');
+    let i = 0;
+    const typeInterval = setInterval(() => {
+      greetEl.textContent = text.slice(0, ++i);
+      if(i >= text.length){
+        clearInterval(typeInterval);
+        setTimeout(() => greetEl.classList.remove('typewriter'), 2000);
+      }
+    }, 90);
+  }
+
+  // === Confetti (canvas-based, no library) ===
+  const confettiCanvas = document.getElementById('confettiCanvas');
+  const cctx = confettiCanvas.getContext('2d');
+  let confettiParticles = [];
+  function resizeConfetti(){
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+  }
+  resizeConfetti();
+  window.addEventListener('resize', resizeConfetti);
+
+  function fireConfetti(opts = {}){
+    const N = opts.hearts ? 60 : 140;
+    const colors = ['#d4af6a','#f9e8c4','#ff9bbc','#ffd76b','#ef4444'];
+    for(let i = 0; i < N; i++){
+      confettiParticles.push({
+        x: window.innerWidth / 2 + (Math.random() - 0.5) * 100,
+        y: window.innerHeight / 2,
+        vx: (Math.random() - 0.5) * 16,
+        vy: -Math.random() * 18 - 6,
+        rot: Math.random() * Math.PI * 2,
+        vrot: (Math.random() - 0.5) * 0.3,
+        size: 8 + Math.random() * 6,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        shape: opts.hearts ? 'heart' : (Math.random() < 0.5 ? 'rect' : 'circle'),
+        life: 0
+      });
+    }
+    if(!confettiRunning) drawConfetti();
+  }
+  let confettiRunning = false;
+  function drawConfetti(){
+    confettiRunning = true;
+    cctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    confettiParticles.forEach(p => {
+      p.life++;
+      p.vy += 0.4; // gravity
+      p.vx *= 0.99;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vrot;
+      cctx.save();
+      cctx.translate(p.x, p.y);
+      cctx.rotate(p.rot);
+      cctx.globalAlpha = Math.max(0, 1 - p.life / 180);
+      cctx.fillStyle = p.color;
+      if(p.shape === 'rect'){
+        cctx.fillRect(-p.size/2, -p.size/4, p.size, p.size/2);
+      } else if(p.shape === 'circle'){
+        cctx.beginPath();
+        cctx.arc(0, 0, p.size/2, 0, Math.PI * 2);
+        cctx.fill();
+      } else { // heart
+        const s = p.size;
+        cctx.beginPath();
+        cctx.moveTo(0, s/4);
+        cctx.bezierCurveTo(s/2, -s/2, s, 0, 0, s);
+        cctx.bezierCurveTo(-s, 0, -s/2, -s/2, 0, s/4);
+        cctx.fill();
+      }
+      cctx.restore();
+    });
+    confettiParticles = confettiParticles.filter(p => p.life < 200 && p.y < window.innerHeight + 50);
+    if(confettiParticles.length > 0){
+      requestAnimationFrame(drawConfetti);
+    } else {
+      confettiRunning = false;
+      cctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    }
+  }
+
+  // Wire confetti to RSVP success
+  const origRsvpHandler = document.getElementById('rsvpForm');
+  // Already has submit handler. Add confetti after success.
+  // Instead, observe class change on success div:
+  const rsvpObs = new MutationObserver(() => {
+    if(document.getElementById('rsvpSuccess').classList.contains('show')){
+      fireConfetti();
+    }
+  });
+  rsvpObs.observe(document.getElementById('rsvpSuccess'), { attributes:true, attributeFilter:['class'] });
+
+  // === Keyboard shortcuts ===
+  document.addEventListener('keydown', (e) => {
+    if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if(lightbox.classList.contains('show')) return;
+    if(e.key === 'm' || e.key === 'M'){
+      document.getElementById('musicToggle').click();
+    }
+    if(e.key === ' '){
+      e.preventDefault();
+      fireConfetti({ hearts: true });
+    }
+  });
+
+  // === Easter egg: Konami code ===
+  const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let konamiIdx = 0;
+  document.addEventListener('keydown', (e) => {
+    if(e.key === konami[konamiIdx]){
+      konamiIdx++;
+      if(konamiIdx === konami.length){
+        konamiIdx = 0;
+        // Big heart shower
+        for(let i = 0; i < 5; i++){
+          setTimeout(() => fireConfetti({ hearts: true }), i * 300);
+        }
+      }
+    } else {
+      konamiIdx = 0;
+    }
+  });
+
+  // === Anniversary mode (after wedding date) ===
+  if(new Date() > WEDDING_DATE){
+    const days = Math.floor((new Date() - WEDDING_DATE) / (1000*60*60*24));
+    const cdLabel = document.querySelectorAll('.countdown-label');
+    if(cdLabel.length) cdLabel[0].textContent = `Đã cưới được ${days} ngày`;
+  }
 
 })();
 </script>
