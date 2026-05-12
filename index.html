@@ -1046,13 +1046,13 @@
     --bg-alt:#f3ebda;
     --bg-soft:#fdfaf3;
     --bg-dark:#1a1208;
-    --ink:#2a1f12;
-    --ink-dim:rgba(42,31,18,0.7);
-    --ink-faded:rgba(42,31,18,0.45);
-    --gold:#b8924f;
-    --gold-light:#d9ae6a;
-    --gold-dim:#7a5f33;
-    --rose:#c97a85;
+    --ink:#1f160a;                       /* darker for full contrast */
+    --ink-dim:rgba(31,22,10,0.88);       /* much higher opacity */
+    --ink-faded:rgba(31,22,10,0.65);
+    --gold:#9c7a3d;                      /* darker gold for readable text */
+    --gold-light:#c9a063;
+    --gold-dim:#6b4f25;
+    --rose:#a14751;                      /* darker rose, readable */
     --red:#a01e2a;
   }
   html, body{background:var(--bg);color:var(--ink)}
@@ -1102,92 +1102,102 @@
   .countdown-sep{color:var(--gold-dim)}
   .scroll-cue{color:rgba(255,235,210,0.5)}
 
-  /* Section titles still gold gradient */
+  /* Section titles - readable gold gradient on light bg */
   .section-title{
-    background:linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 60%, var(--gold-dim) 100%);
+    background:linear-gradient(180deg, var(--gold) 0%, var(--gold-dim) 100%);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    text-shadow:none;
   }
-  .section-subtitle{color:var(--ink-dim)}
-  .section-label{color:var(--gold)}
+  .section-subtitle{color:var(--ink);opacity:0.78;font-weight:400}
+  .section-label{color:var(--gold);font-weight:500}
 
   /* Calendar */
   .calendar{
     background:#fff;
-    border:1px solid rgba(184,146,79,0.25);
-    box-shadow:0 20px 50px rgba(122,95,51,0.15);
+    border:1px solid rgba(156,122,61,0.3);
+    box-shadow:0 20px 50px rgba(107,79,37,0.18);
   }
-  .cal-month{color:var(--gold-dim)}
-  .cal-grid .head{color:rgba(122,95,51,0.7)}
-  .cal-grid .day{color:rgba(42,31,18,0.6)}
-  .cal-grid .day.weekend{color:var(--rose)}
-  .cal-grid .day.wedding{background:var(--gold);color:#fff !important}
-  .cal-year{color:var(--gold)}
-  .savedate-msg{color:var(--ink-dim)}
+  .cal-month{color:var(--gold-dim);font-weight:400}
+  .cal-grid .head{color:var(--gold-dim);font-weight:500}
+  .cal-grid .day{color:var(--ink);font-weight:400}
+  .cal-grid .day.weekend{color:var(--rose);font-weight:500}
+  .cal-grid .day.wedding{
+    background:var(--gold);
+    color:#fff !important;
+    font-weight:600;
+    text-shadow:0 1px 2px rgba(0,0,0,0.2);
+  }
+  .cal-year{color:var(--gold-dim);font-weight:500}
+  .savedate-msg{color:var(--ink);font-weight:400}
 
   /* Couple */
-  .couple-role{color:var(--gold)}
-  .couple-name{color:var(--ink)}
+  .couple-role{color:var(--gold);font-weight:500}
+  .couple-name{color:var(--ink);font-weight:400}
   .couple-script{color:var(--gold)}
-  .couple-parents{color:var(--ink-dim)}
-  .couple-parents .p-label{color:var(--gold-dim)}
+  .couple-parents{color:var(--ink);opacity:0.85;font-weight:400}
+  .couple-parents .p-label{color:var(--gold-dim);font-weight:500;opacity:1}
+  .couple-parents strong{color:var(--ink);font-weight:500;opacity:1}
   .couple-divider{color:var(--gold)}
   .couple-divider .v-line{background:linear-gradient(180deg, transparent, var(--gold), transparent)}
 
   /* Story timeline */
-  .story-timeline::before{background:linear-gradient(180deg, transparent, rgba(184,146,79,0.5), rgba(184,146,79,0.5), transparent)}
+  .story-timeline::before{background:linear-gradient(180deg, transparent, rgba(156,122,61,0.45), rgba(156,122,61,0.45), transparent)}
   .story-event-content{
     background:#fff;
-    border:1px solid rgba(184,146,79,0.18);
-    box-shadow:0 14px 30px rgba(122,95,51,0.08);
+    border:1px solid rgba(156,122,61,0.22);
+    box-shadow:0 14px 30px rgba(107,79,37,0.1);
   }
-  .story-event-dot{background:var(--gold);box-shadow:0 0 20px rgba(184,146,79,0.6)}
-  .story-year{color:var(--gold)}
-  .story-month{color:var(--gold-dim)}
-  .story-title{color:var(--ink)}
-  .story-desc{color:var(--ink-dim)}
+  .story-event-dot{background:var(--gold);box-shadow:0 0 20px rgba(156,122,61,0.55)}
+  .story-year{color:var(--gold);font-weight:500}
+  .story-month{color:var(--gold-dim);font-weight:500}
+  .story-title{color:var(--ink);font-weight:400}
+  .story-desc{color:var(--ink);opacity:0.82;font-weight:400}
 
   /* Invitation */
-  .inv-presenting{color:var(--gold)}
-  .inv-message{color:var(--ink)}
-  .inv-message strong{color:var(--gold)}
+  .inv-presenting{color:var(--gold);font-weight:500}
+  .inv-message{color:var(--ink);font-weight:400}
+  .inv-message strong{color:var(--gold);font-weight:500}
   .inv-signature{color:var(--gold)}
 
   /* Event cards */
   .event-card{
     background:#fff;
-    border:1px solid rgba(184,146,79,0.18);
-    box-shadow:0 14px 40px rgba(122,95,51,0.08);
+    border:1px solid rgba(156,122,61,0.22);
+    box-shadow:0 14px 40px rgba(107,79,37,0.1);
   }
   .event-card:hover{
     border-color:var(--gold);
-    box-shadow:0 30px 60px rgba(122,95,51,0.18), 0 0 0 1px rgba(184,146,79,0.4);
+    box-shadow:0 30px 60px rgba(107,79,37,0.2), 0 0 0 1px rgba(156,122,61,0.4);
   }
-  .event-card-header{border-bottom:1px solid rgba(184,146,79,0.15)}
+  .event-card-header{border-bottom:1px solid rgba(156,122,61,0.18)}
   .event-card-icon{color:var(--gold)}
-  .event-card-name{color:var(--ink)}
-  .event-card-host{color:var(--gold)}
-  .event-row{border-bottom:1px solid rgba(184,146,79,0.08)}
+  .event-card-name{color:var(--ink);font-weight:400}
+  .event-card-host{color:var(--gold);font-weight:500}
+  .event-row{border-bottom:1px solid rgba(156,122,61,0.1)}
   .event-row-icon{color:var(--gold)}
-  .event-row-label{color:var(--gold-dim)}
-  .event-row-value{color:var(--ink)}
-  .event-row-value.time{color:var(--gold)}
+  .event-row-label{color:var(--gold-dim);font-weight:500}
+  .event-row-value{color:var(--ink);font-weight:400}
+  .event-row-value.time{color:var(--gold);font-weight:500}
   .event-map-btn{
-    background:rgba(184,146,79,0.08);
-    border-top:1px solid rgba(184,146,79,0.18);
+    background:rgba(156,122,61,0.1);
+    border-top:1px solid rgba(156,122,61,0.2);
     color:var(--gold-dim);
+    font-weight:500;
   }
   .event-map-btn:hover{background:var(--gold);color:#fff}
   .event-calendar-btn{
-    background:rgba(184,146,79,0.04);
-    border-top:1px solid rgba(184,146,79,0.12);
+    background:rgba(156,122,61,0.05);
+    border-top:1px solid rgba(156,122,61,0.15);
     color:var(--gold-dim);
+    font-weight:500;
   }
-  .event-calendar-btn:hover{color:var(--gold);background:rgba(184,146,79,0.1)}
+  .event-calendar-btn:hover{color:#fff;background:var(--gold-dim)}
 
   /* Dress code */
-  .dress-msg{color:var(--ink)}
-  .dress-msg .accent{color:var(--red)}
-  .dress-aodai{box-shadow:0 30px 80px rgba(160,30,42,0.25), inset 0 0 60px rgba(0,0,0,0.3)}
+  .dress-msg{color:var(--ink);font-weight:400}
+  .dress-msg .accent{color:var(--red);font-weight:500}
+  .dress-aodai{box-shadow:0 30px 80px rgba(160,30,42,0.3), inset 0 0 60px rgba(0,0,0,0.3)}
+  .dress-color-circle::after{color:var(--ink);opacity:0.7;font-weight:500}
 
   /* Gallery */
   .gallery-grid .g-item{
@@ -1202,95 +1212,108 @@
   .btn-gold::before{background:var(--gold)}
 
   /* Forms */
-  .form-group label{color:var(--gold)}
+  .form-group label{color:var(--gold);font-weight:500}
   .form-group input, .form-group textarea, .form-group select{
     background:#fff;
-    border:1px solid rgba(184,146,79,0.3);
+    border:1px solid rgba(156,122,61,0.35);
     color:var(--ink);
+    font-weight:400;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder{
+    color:rgba(31,22,10,0.4);
   }
   .form-group input:focus, .form-group textarea:focus, .form-group select:focus{
     border-color:var(--gold);
     background:#fffdf7;
-    box-shadow:0 0 0 3px rgba(184,146,79,0.1);
+    box-shadow:0 0 0 3px rgba(156,122,61,0.12);
   }
   .form-radio-label{
     background:#fff;
-    border:1px solid rgba(184,146,79,0.3);
-    color:var(--ink-dim);
+    border:1px solid rgba(156,122,61,0.35);
+    color:var(--ink);
+    font-weight:400;
   }
   .form-radio input:checked + .form-radio-label{
-    background:rgba(184,146,79,0.15);
+    background:rgba(156,122,61,0.18);
     border-color:var(--gold);
-    color:var(--gold);
+    color:var(--gold-dim);
+    font-weight:500;
   }
   .form-submit{
     background:var(--gold);
     color:#fff;
+    font-weight:500;
   }
   .form-submit:hover{
-    background:var(--gold-light);
-    box-shadow:0 14px 30px rgba(184,146,79,0.4);
+    background:var(--gold-dim);
+    box-shadow:0 14px 30px rgba(156,122,61,0.4);
   }
-  .form-deadline{color:var(--ink-faded)}
+  .form-deadline{color:var(--ink);opacity:0.6;font-weight:400}
   .form-success{
-    background:rgba(34,160,80,0.1);
-    border:1px solid rgba(34,160,80,0.4);
-    color:#2a8a4f;
+    background:rgba(34,160,80,0.12);
+    border:1px solid rgba(34,160,80,0.5);
+    color:#1e6e3a;
+    font-weight:400;
   }
 
   /* Gift */
-  .gift-intro{color:var(--ink-dim)}
+  .gift-intro{color:var(--ink);opacity:0.85}
   .gift-card{
     background:#fff;
-    border:1px solid rgba(184,146,79,0.2);
-    box-shadow:0 14px 30px rgba(122,95,51,0.1);
+    border:1px solid rgba(156,122,61,0.22);
+    box-shadow:0 14px 30px rgba(107,79,37,0.12);
   }
   .gift-card:hover{
     border-color:var(--gold);
-    box-shadow:0 24px 50px rgba(122,95,51,0.18);
+    box-shadow:0 24px 50px rgba(107,79,37,0.2);
   }
-  .gift-role{color:var(--gold)}
-  .gift-name{color:var(--ink)}
-  .gift-bank{color:var(--ink-dim)}
+  .gift-role{color:var(--gold);font-weight:500}
+  .gift-name{color:var(--ink);font-weight:400}
+  .gift-bank{color:var(--ink);opacity:0.8;font-weight:500}
   .gift-account{
     color:var(--gold-dim);
-    background:rgba(184,146,79,0.08);
+    background:rgba(156,122,61,0.08);
+    font-weight:500;
   }
-  .gift-account:hover{background:rgba(184,146,79,0.18);color:var(--gold)}
-  .gift-owner{color:var(--ink-faded)}
+  .gift-account:hover{background:rgba(156,122,61,0.18);color:var(--gold)}
+  .gift-owner{color:var(--ink);opacity:0.7;font-weight:500}
 
   /* Live stream */
   .live-card{
     background:#fff;
-    border:1px solid rgba(184,146,79,0.2);
-    box-shadow:0 14px 40px rgba(122,95,51,0.1);
+    border:1px solid rgba(156,122,61,0.25);
+    box-shadow:0 14px 40px rgba(107,79,37,0.12);
   }
-  .live-time{color:var(--gold-dim)}
-  .live-info{color:var(--ink-dim)}
+  .live-time{color:var(--gold-dim);font-weight:500}
+  .live-info{color:var(--ink);opacity:0.85;font-weight:400}
 
   /* Photo upload */
   .upload-card{
     background:#fff;
-    border:1px dashed rgba(184,146,79,0.35);
+    border:1px dashed rgba(156,122,61,0.4);
   }
-  .upload-card:hover{background:rgba(184,146,79,0.05)}
+  .upload-card:hover{background:rgba(156,122,61,0.05)}
   .upload-icon{color:var(--gold)}
-  .upload-title{color:var(--ink)}
-  .upload-desc{color:var(--ink-dim)}
+  .upload-title{color:var(--ink);font-weight:400}
+  .upload-desc{color:var(--ink);opacity:0.85;font-weight:400}
 
-  /* Nav mini & music toggle (still dark glass for contrast) */
+  /* Nav mini & music toggle (light glass for contrast) */
   .nav-mini{
-    background:rgba(255,250,240,0.85);
-    border:1px solid rgba(184,146,79,0.25);
-    box-shadow:0 8px 24px rgba(122,95,51,0.15);
+    background:rgba(255,251,243,0.95);
+    border:1px solid rgba(156,122,61,0.3);
+    box-shadow:0 8px 24px rgba(107,79,37,0.18);
   }
-  .nav-mini a{color:var(--ink-dim)}
-  .nav-mini a:hover, .nav-mini a.active{color:var(--gold);background:rgba(184,146,79,0.12)}
-  .music-toggle{
-    background:rgba(255,250,240,0.85);
-    border:1px solid rgba(184,146,79,0.25);
+  .nav-mini a{color:var(--ink);opacity:0.75;font-weight:500}
+  .nav-mini a:hover, .nav-mini a.active{
     color:var(--gold-dim);
-    box-shadow:0 8px 24px rgba(122,95,51,0.15);
+    background:rgba(156,122,61,0.15);
+    opacity:1;
+  }
+  .music-toggle{
+    background:rgba(255,251,243,0.95);
+    border:1px solid rgba(156,122,61,0.3);
+    color:var(--gold-dim);
+    box-shadow:0 8px 24px rgba(107,79,37,0.18);
   }
   .music-toggle:hover{color:var(--gold);border-color:var(--gold)}
 
