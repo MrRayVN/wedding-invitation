@@ -680,8 +680,8 @@
     width:max-content;
     will-change:transform;
   }
-  #wishesRowTop .wishes-track{ animation: ws-scroll-left 320s linear infinite; }
-  #wishesRowBot .wishes-track{ animation: ws-scroll-right 380s linear infinite; }
+  #wishesRowTop .wishes-track{ animation: ws-scroll-left 600s linear infinite; }
+  #wishesRowBot .wishes-track{ animation: ws-scroll-right 720s linear infinite; }
   .wishes-stage:hover .wishes-track{ animation-play-state:paused; }
   @keyframes ws-scroll-left  { from{transform:translateX(0)} to{transform:translateX(-50%)} }
   @keyframes ws-scroll-right { from{transform:translateX(-50%)} to{transform:translateX(0)} }
@@ -691,25 +691,28 @@
     display:inline-flex;align-items:center;gap:10px;
     padding:12px 18px;
     border-radius:999px;
-    background:linear-gradient(135deg, rgba(212,175,106,0.10), rgba(232,180,184,0.06));
-    border:1px solid rgba(212,175,106,0.28);
-    color:var(--ink);
+    background:linear-gradient(135deg, rgba(10,8,16,0.92), rgba(5,4,7,0.88));
+    border:1px solid rgba(212,175,106,0.45);
+    color:#ffffff;
     font-family:var(--italic);font-style:italic;
     font-size:15px;letter-spacing:0.02em;
-    backdrop-filter:blur(4px);
-    -webkit-backdrop-filter:blur(4px);
-    box-shadow:0 8px 22px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(249,232,196,0.04);
+    box-shadow:0 8px 22px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(249,232,196,0.06);
     transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
   }
   .ws-card:hover{
     transform:translateY(-2px);
     border-color:var(--gold);
-    box-shadow:0 14px 30px rgba(212,175,106,0.25);
+    box-shadow:0 14px 30px rgba(212,175,106,0.35);
   }
   .ws-card .ws-emoji{ font-size:18px; line-height:1; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
-  .ws-card .ws-name{ color:var(--gold-light); font-style:normal; font-family:var(--sans); font-weight:500; font-size:14px; letter-spacing:0.04em; }
-  .ws-card .ws-sep{ color:var(--gold); opacity:0.55; }
-  .ws-card .ws-msg{ color:var(--ink-dim); }
+  .ws-card .ws-name{
+    color:#ffffff;
+    font-style:normal; font-family:var(--sans);
+    font-weight:600; font-size:14px; letter-spacing:0.04em;
+    text-shadow:0 1px 2px rgba(0,0,0,0.6);
+  }
+  .ws-card .ws-sep{ color:var(--gold); opacity:0.7; }
+  .ws-card .ws-msg{ color:#f9e8c4; opacity:0.92; }
 
   .wishes-footnote{
     text-align:center;
@@ -737,35 +740,40 @@
     height:48px;
     display:flex; align-items:center;
     overflow:hidden;
-    background:linear-gradient(180deg, rgba(5,4,7,0.55) 0%, rgba(5,4,7,0.95) 60%);
-    border-top:1px solid rgba(212,175,106,0.28);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-    box-shadow:0 -10px 30px rgba(0,0,0,0.35);
-    mask-image:linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    background:rgba(5,4,7,0.97);
+    border-top:1px solid rgba(212,175,106,0.4);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 -10px 30px rgba(0,0,0,0.5);
+    mask-image:linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
     transition:transform .4s ease;
   }
   .ws-ticker.is-hidden{ transform:translateY(110%); }
   .ws-ticker-track{
-    display:flex; gap:36px;
+    display:flex; gap:42px;
     width:max-content;
     padding:0 80px 0 24px;
-    animation: ws-ticker-scroll 480s linear infinite;
+    animation: ws-ticker-scroll 1100s linear infinite;
     will-change:transform;
   }
   .ws-ticker:hover .ws-ticker-track{ animation-play-state:paused; }
   @keyframes ws-ticker-scroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
   .ws-tk{
     display:inline-flex; align-items:center; gap:10px;
-    color:var(--ink-dim);
+    color:#f9e8c4;
     font-family:var(--italic); font-style:italic;
     font-size:14px; letter-spacing:0.03em;
     white-space:nowrap;
   }
   .ws-tk .e{ font-style:normal; font-size:16px; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
-  .ws-tk .n{ color:var(--gold-light); font-family:var(--sans); font-style:normal; font-weight:500; font-size:13px; letter-spacing:0.05em; }
-  .ws-tk .d{ color:var(--gold); opacity:0.55; }
+  .ws-tk .n{
+    color:#ffffff;
+    font-family:var(--sans); font-style:normal;
+    font-weight:600; font-size:13px; letter-spacing:0.05em;
+    text-shadow:0 1px 2px rgba(0,0,0,0.7);
+  }
+  .ws-tk .d{ color:var(--gold); opacity:0.7; }
   .ws-ticker-close{
     position:absolute; top:50%; right:10px; transform:translateY(-50%);
     width:26px; height:26px; border-radius:50%;
