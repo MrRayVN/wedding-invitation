@@ -680,8 +680,8 @@
     width:max-content;
     will-change:transform;
   }
-  #wishesRowTop .wishes-track{ animation: ws-scroll-left 90s linear infinite; }
-  #wishesRowBot .wishes-track{ animation: ws-scroll-right 110s linear infinite; }
+  #wishesRowTop .wishes-track{ animation: ws-scroll-left 320s linear infinite; }
+  #wishesRowBot .wishes-track{ animation: ws-scroll-right 380s linear infinite; }
   .wishes-stage:hover .wishes-track{ animation-play-state:paused; }
   @keyframes ws-scroll-left  { from{transform:translateX(0)} to{transform:translateX(-50%)} }
   @keyframes ws-scroll-right { from{transform:translateX(-50%)} to{transform:translateX(0)} }
@@ -726,6 +726,65 @@
   }
   @media (prefers-reduced-motion:reduce){
     #wishesRowTop .wishes-track, #wishesRowBot .wishes-track{ animation:none; transform:translateX(0); }
+    .ws-ticker-track{ animation:none; transform:translateX(0); }
+  }
+
+  /* ==================== SITE-WIDE STICKY TICKER ==================== */
+  body{ padding-bottom:52px; }
+  .ws-ticker{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:90;
+    height:48px;
+    display:flex; align-items:center;
+    overflow:hidden;
+    background:linear-gradient(180deg, rgba(5,4,7,0.55) 0%, rgba(5,4,7,0.95) 60%);
+    border-top:1px solid rgba(212,175,106,0.28);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 -10px 30px rgba(0,0,0,0.35);
+    mask-image:linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    transition:transform .4s ease;
+  }
+  .ws-ticker.is-hidden{ transform:translateY(110%); }
+  .ws-ticker-track{
+    display:flex; gap:36px;
+    width:max-content;
+    padding:0 80px 0 24px;
+    animation: ws-ticker-scroll 480s linear infinite;
+    will-change:transform;
+  }
+  .ws-ticker:hover .ws-ticker-track{ animation-play-state:paused; }
+  @keyframes ws-ticker-scroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .ws-tk{
+    display:inline-flex; align-items:center; gap:10px;
+    color:var(--ink-dim);
+    font-family:var(--italic); font-style:italic;
+    font-size:14px; letter-spacing:0.03em;
+    white-space:nowrap;
+  }
+  .ws-tk .e{ font-style:normal; font-size:16px; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
+  .ws-tk .n{ color:var(--gold-light); font-family:var(--sans); font-style:normal; font-weight:500; font-size:13px; letter-spacing:0.05em; }
+  .ws-tk .d{ color:var(--gold); opacity:0.55; }
+  .ws-ticker-close{
+    position:absolute; top:50%; right:10px; transform:translateY(-50%);
+    width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(212,175,106,0.14);
+    color:var(--gold-light);
+    border:1px solid rgba(212,175,106,0.35);
+    cursor:pointer;
+    font-size:14px; line-height:1;
+    z-index:2;
+    transition:background .25s, color .25s;
+  }
+  .ws-ticker-close:hover{ background:var(--gold); color:#1a1208; }
+  @media (max-width:640px){
+    body{ padding-bottom:44px; }
+    .ws-ticker{ height:42px; }
+    .ws-tk{ font-size:12px; }
+    .ws-tk .n{ font-size:11px; }
+    .ws-tk .e{ font-size:14px; }
   }
 
   /* ==================== GALLERY ==================== */
@@ -2878,6 +2937,23 @@
     }
   });
 
+  // === Site-wide Wishes Ticker ===
+  (function initWishesTicker(){
+    const track = document.querySelector('#wsTicker .ws-ticker-track');
+    if(!track) return;
+    const sh = _wsShuffle(WISHES_NAMES);
+    const cards = sh.map(n =>
+      `<span class="ws-tk"><span class="e">${_wsPick(WISHES_EMOJIS)}</span><span class="n">${_wsEsc(n)}</span><span class="d">·</span><span>${_wsPick(WISHES_TEMPLATES)}</span></span>`
+    ).join('');
+    track.innerHTML = cards + cards;
+    const ticker = document.getElementById('wsTicker');
+    const closeBtn = ticker.querySelector('.ws-ticker-close');
+    closeBtn.addEventListener('click', () => {
+      ticker.classList.add('is-hidden');
+      document.body.style.paddingBottom = '0';
+    });
+  })();
+
   // === Anniversary mode (after wedding date) ===
   if(new Date() > WEDDING_DATE){
     const days = Math.floor((new Date() - WEDDING_DATE) / (1000*60*60*24));
@@ -2887,5 +2963,11 @@
 
 })();
 </script>
+
+<!-- ============ SITE-WIDE WISHES TICKER ============ -->
+<div class="ws-ticker" id="wsTicker" aria-label="Lời chúc từ khách mời">
+  <div class="ws-ticker-track"></div>
+  <button class="ws-ticker-close" aria-label="Ẩn thanh lời chúc" title="Ẩn">×</button>
+</div>
 </body>
 </html>
