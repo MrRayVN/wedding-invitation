@@ -2376,10 +2376,10 @@
 <div class="easter-hint">↑↑↓↓←→←→ba</div>
 
 <!-- Background music -->
-<audio id="bgm" loop preload="none">
+<audio id="bgm" loop autoplay preload="auto" playsinline>
   <source src="https://mrrayvn.github.io/wedding-slideshow/02-50-nam-ve-sau.mp3" type="audio/mpeg">
 </audio>
-
+  
 <script>
 (function(){
   'use strict';
@@ -2462,18 +2462,45 @@
     });
   });
 
-  // ============ MUSIC TOGGLE ============
+  // ============ MUSIC TOGGLE + AUTOPLAY ============
   const bgm = document.getElementById('bgm');
   const musicToggle = document.getElementById('musicToggle');
   bgm.volume = 0.35;
+
+  function setMusicState(isPlaying){
+    musicToggle.classList.toggle('playing', isPlaying);
+    musicToggle.setAttribute('aria-label', isPlaying ? 'Tắt nhạc nền' : 'Bật nhạc nền');
+    musicToggle.title = isPlaying ? 'Tắt nhạc nền' : 'Bật nhạc nền';
+  }
+
+  function playBackgroundMusic(){
+    return bgm.play().then(() => setMusicState(true));
+  }
+
+  function enableMusicAfterFirstInteraction(){
+    const startMusicOnce = () => {
+      playBackgroundMusic()
+        .catch(err => console.warn('Audio blocked:', err))
+        .finally(() => {
+          document.removeEventListener('pointerdown', startMusicOnce);
+          document.removeEventListener('touchstart', startMusicOnce);
+          document.removeEventListener('keydown', startMusicOnce);
+        });
+    };
+    document.addEventListener('pointerdown', startMusicOnce, { once:true });
+    document.addEventListener('touchstart', startMusicOnce, { once:true });
+    document.addEventListener('keydown', startMusicOnce, { once:true });
+  }
+
+  setMusicState(false);
+  playBackgroundMusic().catch(() => enableMusicAfterFirstInteraction());
+
   musicToggle.addEventListener('click', () => {
     if(bgm.paused){
-      bgm.play().then(() => {
-        musicToggle.classList.add('playing');
-      }).catch(err => console.warn('Audio blocked:', err));
+      playBackgroundMusic().catch(err => console.warn('Audio blocked:', err));
     } else {
       bgm.pause();
-      musicToggle.classList.remove('playing');
+      setMusicState(false);
     }
   });
 
