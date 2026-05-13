@@ -706,13 +706,19 @@
   }
   .ws-card .ws-emoji{ font-size:18px; line-height:1; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
   .ws-card .ws-name{
-    color:#ffffff;
+    color:#d4af6a;
     font-style:normal; font-family:var(--sans);
-    font-weight:600; font-size:14px; letter-spacing:0.04em;
-    text-shadow:0 1px 2px rgba(0,0,0,0.6);
+    font-weight:700; font-size:11px; letter-spacing:0.18em;
+    text-transform:uppercase;
+    text-shadow:0 1px 2px rgba(0,0,0,0.7);
   }
-  .ws-card .ws-sep{ color:var(--gold); opacity:0.7; }
-  .ws-card .ws-msg{ color:#f9e8c4; opacity:0.92; }
+  .ws-card .ws-sep{ color:rgba(212,175,106,0.45); margin:0 2px; }
+  .ws-card .ws-msg{
+    color:#ffffff;
+    font-family:var(--italic); font-style:italic;
+    font-size:16px; font-weight:400;
+    text-shadow:0 1px 2px rgba(0,0,0,0.5);
+  }
 
   .wishes-footnote{
     text-align:center;
@@ -724,8 +730,10 @@
   .wishes-footnote .ws-heart{ color:var(--rose); margin:0 8px; }
 
   @media (max-width:640px){
-    .ws-card{ padding:10px 14px; font-size:13px; }
-    .ws-card .ws-name{ font-size:12px; }
+    .ws-card{ padding:10px 14px; }
+    .ws-card .ws-name{ font-size:9px; letter-spacing:0.16em; }
+    .ws-card .ws-msg{ font-size:14px; }
+    .ws-card .ws-emoji{ font-size:16px; }
   }
   @media (prefers-reduced-motion:reduce){
     #wishesRowTop .wishes-track, #wishesRowBot .wishes-track{ animation:none; transform:translateX(0); }
@@ -761,19 +769,22 @@
   @keyframes ws-ticker-scroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
   .ws-tk{
     display:inline-flex; align-items:center; gap:10px;
-    color:#f9e8c4;
+    color:#ffffff;
     font-family:var(--italic); font-style:italic;
-    font-size:14px; letter-spacing:0.03em;
+    font-size:15px; font-weight:400;
+    letter-spacing:0.02em;
     white-space:nowrap;
+    text-shadow:0 1px 2px rgba(0,0,0,0.6);
   }
   .ws-tk .e{ font-style:normal; font-size:16px; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
   .ws-tk .n{
-    color:#ffffff;
+    color:#d4af6a;
     font-family:var(--sans); font-style:normal;
-    font-weight:600; font-size:13px; letter-spacing:0.05em;
-    text-shadow:0 1px 2px rgba(0,0,0,0.7);
+    font-weight:700; font-size:10px; letter-spacing:0.2em;
+    text-transform:uppercase;
+    text-shadow:0 1px 2px rgba(0,0,0,0.8);
   }
-  .ws-tk .d{ color:var(--gold); opacity:0.7; }
+  .ws-tk .d{ color:rgba(212,175,106,0.45); margin:0 2px; }
   .ws-ticker-close{
     position:absolute; top:50%; right:10px; transform:translateY(-50%);
     width:26px; height:26px; border-radius:50%;
@@ -790,8 +801,8 @@
   @media (max-width:640px){
     body{ padding-bottom:44px; }
     .ws-ticker{ height:42px; }
-    .ws-tk{ font-size:12px; }
-    .ws-tk .n{ font-size:11px; }
+    .ws-tk{ font-size:13px; }
+    .ws-tk .n{ font-size:9px; letter-spacing:0.18em; }
     .ws-tk .e{ font-size:14px; }
   }
 
