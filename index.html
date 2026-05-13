@@ -655,55 +655,78 @@
   .event-map-btn:hover{background:var(--gold);color:#1a1208}
   .event-map-btn svg{width:16px;height:16px;fill:currentColor}
 
-  /* ==================== DRESS CODE ==================== */
-  #dresscode{
-    background:linear-gradient(180deg, var(--bg-alt), #1a0a0a 100%);
-    text-align:center;
-  }
-  .dress-aodai{
-    width:160px;height:240px;
-    margin:0 auto 30px;
+  /* ==================== WISHES WALL ==================== */
+  #wishes{
     background:
-      linear-gradient(180deg, transparent 0%, transparent 12%, var(--red) 12%, var(--red) 86%, transparent 86%),
-      linear-gradient(90deg, transparent 0%, transparent 38%, var(--gold) 38%, var(--gold) 62%, transparent 62%);
-    border-radius:50% 50% 12% 12% / 18% 18% 12% 12%;
-    box-shadow:0 30px 80px rgba(179,38,45,0.4), inset 0 0 60px rgba(0,0,0,0.4);
+      radial-gradient(ellipse at 20% 0%, rgba(212,175,106,0.10), transparent 55%),
+      radial-gradient(ellipse at 80% 100%, rgba(232,180,184,0.08), transparent 55%),
+      linear-gradient(180deg, var(--bg-alt), var(--bg) 100%);
+    overflow:hidden;
+  }
+  .wishes-stage{
     position:relative;
-    transform:rotate(-2deg);
+    margin-top:40px;
+    padding:24px 0;
   }
-  .dress-aodai::before{
-    content:'';position:absolute;
-    top:8%;left:50%;transform:translateX(-50%);
-    width:24px;height:24px;border-radius:50%;
-    background:var(--gold);
-    box-shadow:0 0 20px var(--gold);
+  .wishes-row{
+    overflow:hidden;
+    padding:10px 0;
+    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   }
-  .dress-color-circle{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:80px;height:80px;border-radius:50%;
-    background:var(--red);
-    margin:20px 8px;
-    box-shadow:0 10px 30px rgba(179,38,45,0.5);
-    position:relative;
+  .wishes-track{
+    display:flex;
+    gap:14px;
+    width:max-content;
+    will-change:transform;
   }
-  .dress-color-circle::after{
-    content:'#B3262D';
-    position:absolute;
-    bottom:-26px;left:50%;transform:translateX(-50%);
-    font-family:var(--italic);font-style:italic;
-    font-size:11px;letter-spacing:0.2em;
-    color:var(--ink-faded);
-    white-space:nowrap;
-  }
-  .dress-msg{
-    font-family:var(--italic);font-style:italic;
+  #wishesRowTop .wishes-track{ animation: ws-scroll-left 90s linear infinite; }
+  #wishesRowBot .wishes-track{ animation: ws-scroll-right 110s linear infinite; }
+  .wishes-stage:hover .wishes-track{ animation-play-state:paused; }
+  @keyframes ws-scroll-left  { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  @keyframes ws-scroll-right { from{transform:translateX(-50%)} to{transform:translateX(0)} }
+
+  .ws-card{
+    flex:0 0 auto;
+    display:inline-flex;align-items:center;gap:10px;
+    padding:12px 18px;
+    border-radius:999px;
+    background:linear-gradient(135deg, rgba(212,175,106,0.10), rgba(232,180,184,0.06));
+    border:1px solid rgba(212,175,106,0.28);
     color:var(--ink);
-    font-size:clamp(18px,2.2vw,24px);
-    line-height:1.7;
-    max-width:560px;margin:30px auto 0;
-    letter-spacing:0.04em;
+    font-family:var(--italic);font-style:italic;
+    font-size:15px;letter-spacing:0.02em;
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+    box-shadow:0 8px 22px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(249,232,196,0.04);
+    transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
   }
-  .dress-msg .accent{color:var(--rose);font-weight:400}
+  .ws-card:hover{
+    transform:translateY(-2px);
+    border-color:var(--gold);
+    box-shadow:0 14px 30px rgba(212,175,106,0.25);
+  }
+  .ws-card .ws-emoji{ font-size:18px; line-height:1; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  .ws-card .ws-name{ color:var(--gold-light); font-style:normal; font-family:var(--sans); font-weight:500; font-size:14px; letter-spacing:0.04em; }
+  .ws-card .ws-sep{ color:var(--gold); opacity:0.55; }
+  .ws-card .ws-msg{ color:var(--ink-dim); }
+
+  .wishes-footnote{
+    text-align:center;
+    margin-top:34px;
+    font-family:var(--italic);font-style:italic;
+    color:var(--ink-dim);
+    font-size:15px;letter-spacing:0.06em;
+  }
+  .wishes-footnote .ws-heart{ color:var(--rose); margin:0 8px; }
+
+  @media (max-width:640px){
+    .ws-card{ padding:10px 14px; font-size:13px; }
+    .ws-card .ws-name{ font-size:12px; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    #wishesRowTop .wishes-track, #wishesRowBot .wishes-track{ animation:none; transform:translateX(0); }
+  }
 
   /* ==================== GALLERY ==================== */
   #gallery{background:var(--bg)}
@@ -1075,9 +1098,6 @@
       var(--bg-soft);
   }
   #schedule{background:var(--bg-alt)}
-  #dresscode{
-    background:linear-gradient(180deg, var(--bg-alt) 0%, #f5d8c4 100%);
-  }
   #gallery{background:var(--bg)}
   #rsvp{background:var(--bg-alt)}
   #gift{background:var(--bg)}
@@ -1200,12 +1220,6 @@
     font-weight:500;
   }
   .event-calendar-btn:hover{color:#fff;background:var(--gold-dim)}
-
-  /* Dress code */
-  .dress-msg{color:var(--ink);font-weight:400}
-  .dress-msg .accent{color:var(--red);font-weight:500}
-  .dress-aodai{box-shadow:0 30px 80px rgba(160,30,42,0.3), inset 0 0 60px rgba(0,0,0,0.3)}
-  .dress-color-circle::after{color:var(--ink);opacity:0.7;font-weight:500}
 
   /* Gallery */
   .gallery-grid .g-item{
@@ -1927,7 +1941,7 @@
             <div class="event-row-icon">🕐</div>
             <div class="event-row-content">
               <div class="event-row-label">Giờ</div>
-              <div class="event-row-value time">11:00 trưa</div>
+              <div class="event-row-value time">17:00</div>
             </div>
           </div>
           <div class="event-row">
@@ -1966,7 +1980,7 @@
             <div class="event-row-icon">🕐</div>
             <div class="event-row-content">
               <div class="event-row-label">Giờ</div>
-              <div class="event-row-value time">11:00 trưa</div>
+              <div class="event-row-value time">17:00</div>
             </div>
           </div>
           <div class="event-row">
@@ -1991,24 +2005,21 @@
   </div>
 </section>
 
-<!-- ============ DRESS CODE ============ -->
-<section id="dresscode">
-  <div class="section-narrow">
-    <div class="section-label reveal">Dress Code</div>
-    <h2 class="section-title reveal reveal-delay-1">Trang Phục</h2>
-    <p class="section-subtitle reveal reveal-delay-2">— Sắc đỏ truyền thống —</p>
+<!-- ============ WISHES WALL ============ -->
+<section id="wishes">
+  <div class="section-inner">
+    <div class="section-label reveal">Tường Lời Chúc</div>
+    <h2 class="section-title reveal reveal-delay-1">Lời Chúc Yêu Thương</h2>
+    <p class="section-subtitle reveal reveal-delay-2">— Hơn 600 người thân yêu đồng hành cùng chúng tôi —</p>
 
-    <div class="reveal reveal-delay-2">
-      <div class="dress-aodai"></div>
-      <div>
-        <span class="dress-color-circle"></span>
-      </div>
-      <p class="dress-msg">
-        Trân trọng đề nghị Quý vị diện <span class="accent">áo dài tông đỏ</span><br>
-        để cùng nhau ghi lại những khung hình đẹp nhất<br>
-        trong ngày trọng đại của chúng tôi.
-      </p>
+    <div class="wishes-stage reveal reveal-delay-2">
+      <div class="wishes-row" id="wishesRowTop"><div class="wishes-track"></div></div>
+      <div class="wishes-row" id="wishesRowBot"><div class="wishes-track"></div></div>
     </div>
+
+    <p class="wishes-footnote reveal reveal-delay-3">
+      <span class="ws-heart">♥</span> Cảm ơn quý vị đã gửi lời chúc đến chúng tôi <span class="ws-heart">♥</span>
+    </p>
   </div>
 </section>
 
@@ -2586,15 +2597,15 @@
     },
     {
       title: 'Tiệc Cưới Nhà Trai · Tấn Đạt & Lệ Quyên',
-      start: '20260515T110000',
-      end:   '20260515T140000',
+      start: '20260515T170000',
+      end:   '20260515T200000',
       location: 'Trung Tâm Hội Nghị Tiệc Cưới Riverside, Khánh Hòa',
       description: 'Tiệc đãi khách của Tấn Đạt & Lệ Quyên\\n\\nhttps://maps.app.goo.gl/3qGWkbkqwoS3qe4e6'
     },
     {
       title: 'Tiệc Cưới Nhà Gái · Tấn Đạt & Lệ Quyên',
-      start: '20260516T110000',
-      end:   '20260516T140000',
+      start: '20260516T170000',
+      end:   '20260516T200000',
       location: 'Trung Tâm Tiệc Cưới Phúc Thịnh An, Khánh Hòa',
       description: 'Tiệc đãi khách của Tấn Đạt & Lệ Quyên\\n\\nhttps://maps.app.goo.gl/WGxtBLEhiNTKfyyC9'
     }
@@ -2628,6 +2639,45 @@
       URL.revokeObjectURL(url);
     });
   });
+
+  // === Wishes Wall ===
+  const WISHES_NAMES = ["Ngân Lễ Tân","Anh Vui","Chị Nga","Chị Bình","Chị Lam","Ngọc Hiền","Cô Thủy","Trúc","Quỳnh Hương Iso","Chị Trinh","Anh Hải","Chị Nam","Anh Lý","Anh Vịnh","Chị Hoàng","Trang","Tuyết","Duyên","Anh Kha","Anh Trọng Anh","Anh Toàn","Chị Tiễn","Chị Phương","Chị Sương","Chị Vy","Phương","Khuê","Minh","Thảo","Anh Thái","Anh Phú","Anh Dương","Khiêm","Chị Phòng","Anh Đoàn","Hiếu IT","Tuyên IT","GĐ Pháp Điện","Chị Thái","Anh Quốc","Anh Thành","Anh Văn","Anh Hạnh","Chị Hiệp","Anh Tuyến","Anh Vủ","Chị Vinh","Chi","Chị Giỏi","Chị Nhi Kế Toán","Chị Tuyết Kế Toán","Tố Lan Kế Toán","Chị Ái Huyền Kế Toán","Chị Thủy Kế Toán","Chị Thanh Huyền Kế Toán","Chị Vân Anh Kế Toán","Chị Thải Kế Toán","Chị Hạnh Kế Toán","Chị Trang Kế Toán","Chị Xuân Kế Toán","Chị Loan","Anh Trường Kế Toán","Chị Giang","Mi Nấu Đường","Huy XLM","Lâm Nấu Đường","Anh Hồng Kinh Doanh","Anh Quốc Dũng Nguyên Liệu","Anh Luân Nguyên Liệu","Anh Tiến Nguyên Liệu Vkck","Anh Hoàng Dũng Nguyên Liệu","Anh Nhân Nguyên Liệu","Anh Thảo Nguyên Liệu","Chị Thúy Nguyên Liệu","Trang Nguyên Liệu","Thuyên Nguyên Liệu","Cô Hoa Tạp Vụ","Anh Phát Lái Xe","Anh Trung Lái Xe","Bạn Ngọc Đại Học","Bạn Thúy Vi Đại Học","Bạn Tường Vy Đại Học","Bạn Xuân Đại Học","Bạn Thủy Đại Học","Tuân Thủ Kho","Bạn Nhi","Bạn Thành","Bạn Vinh","Bạn Huyền Trang","Kim Ngân","Út Cưng","Cặp Đôi Phong","Toàn","Tịnh","Bạn Lành","Nhật Anh","Chị Vy Bạn Đạt","Tiến Anh Bạn Cấp 3","Huỳnh Hùng Bạn Cấp 3","Huy Lý","Lê Quốc Đạt","Lê Thành Đạt","Duy Phương","Thị Minh","Trí Bạn C3","Tèo","Tâm Bùi","Vợ Chồng Bạn Trúc C3","Hiếu Bạn Đại Học Đang Ở Nhật","Đức Hà","Phi","Phúc Râu","Tiến Hưng Bạn Đại Học","Đạt Boy","Huỳnh Khắc Giang","Ly","Trang Chị Q.Đạt","Cậu Cọ Chủ Trọ","Bạn Chiểu Quảng Ngãi","Bé Muội Con Cậu 5","Mao Con Cậu 5","Thư Con Dì Tâm","Long Con Dì Tâm","Xu Con Cậu 7","Nhung Con Cậu 7","Phương Con Cậu 8","È Con Cậu 8","Bi Con Cậu 8","Cafe Con Dì Xí","Ngân Con Dì Xí","Anh Hưng","Anh Thịnh","Chị Hải","Anh Xị","Bé Ba","Anh Dũng","Anh Tý","Win","Gia Đình Nhà Cậu 2","Cậu 5","Gia Đình Nhà Dì Tâm","Mợ 7","Gia Đình Nhà Cậu Út","Gia Đình Nhà Dì Xí","Cô 2","Cô 4","Gia Đình Nhà Chú 6","Gia Đình Chị Hiền","Anh Minh","Anh Luân","Kha Quang Nam Việt","Anh Tài Xế","Anh Vũ","Anh Trực","Anh Đỏ","Chị 3 Những","Anh Hiếu","Chị 7","Cháu Tú","Anh Ba","Anh Sử","Chị 3 Dũng","Cháu Trang","Cháu Tí","Chị Bốn Quá","Chị 6 Giáo","Anh Quán Anh","Anh Quán Em","Mợ 2 Xuyến","Em Thành","Gia Đình Bác 9","Chị Thảo","Gia Đình Chị 4 Ròm","Anh Thìn","Chị Bé","Chị Chai","Chị Cờ","Chị Mỹ","Anh 3 Đeo","Anh 7 Ngọ","Bạn Đông","Gia Đình Ly Vạn Giã","Em Diễm","Gia Đình Dì Lộc","Em Hoa Sang","Mợ 8 Thọ","Gia Đình Cậu Tâm","Gia Đình Chị Bích","Gia Đình Hòa Hiệp","Gia Đình Thoa Lai","Gia Đình Lê Nghĩ","Gia Đình Loan Sở","Gia Đình Anh Mỹ","Gia Đình Em Trung","Gia Đình Sang Lai","Gia Đình 10 Mưa","Gia Đình Em Hiền Liên","Gia Đình Em Toàn","Gia Đình Em Hoàng Mai","Gia Đình Em Hằng Thời","Em Hòa","Gia Đình Em Liên Út","Gia Đình Em Yến Út","Chị Vân","Gia Đình Hạnh Phú","Gia Đình Em Huynh Trang","Em Oanh","Gia Đình Hùng Út","Gia Đình Tâm Hằng","Gia Đình Em Dũng","Gia Đình Em Mai Khánh","Gia Đình 10 Chu","Gia Đình Cháu Bé Nhỏ","Gia Đình Cháu Quyên","Gia Đình Tiết Đò","Bom Lê","Gia Đình Em Lan Bồng","Gia Đình Liên Bình","Gia Đình Trường Thoa","Gia Đình Chị Miêng","Gia Đình Lụm Ý","Gia Đình Cảnh Ngọc Được","Gia Đình Út Hưng","Gia Đình Chị Cúc Hiền","Gia Đình Cảnh Nhung","Gia Đình Thím 7 Ngọc","Gia Đình Em Mơ","Gia Đình Hồng Phước","Gia Đình Em Phúc Hiền","Con Trai Chú Phúc","Gia Đình Chú Quý","Gia Đình Chú Thành","Gia Đình Cô Trinh Đẹt","Gia Đình Cô Lẳng","Gia Đình Chị 6 Huệ","Gia Đình Anh Cu Mì","Gia Đình Huy Hạnh","Gia Đình Bình Lai","Gia Đình Duy Chợ Ninh Hòa","Gia Đình Cậu 10 Ngọc","Gia Đình Cậu 8 Đôn","Gia Đình Tí","Gia Đình Trường","Gia Đình Nguyệt Chị","Gia Đình Nguyệt Em","Gia Đình Em Tăng Cậu 3","Gia Đình Chị 7 Bọm","Gia Đình Em Xù","Gia Đình Em Nâu","Gia Đình Anh Vân","Gia Đình Bạn Hậu","Đen Bé Chợ","Ý Ninh Quang","Gia Đình Thắm","Gia Đình Thúy","Gia Đình Hà Bình","Gia Đình Em Thiện","Gia Đình Em Thừa","Gia Đình Em Tâm Trưng","Gia Đình Em Út 10","Gia Đình Em Hiếu","Gia Đình Em Dui","Gia Đình Em Lem","Gia Đình Em Xiêm Hồng","Anh 3 Mãi","Anh Tí 3 Mãi","Anh Út 3 Mãi","Cậu 3 Hưng","Gia Đình Em Thảo","Gia Đình Em Trọng","Gia Đình Em Lai Râm","Gia Đình Anh Chị Thủy","Em Loan Bình","Gia Đình Em Hiền","Gia Đình Em Hậu","Gia Đình Em Loan","Dì Dượng Tư Lưỡng","Gia Đình Duyên Bé","Trang Châu","Bạn Thảo","Gia Đình Em Bình","Gia Đình Em Phượng","Chị Hà","Gia Đình A Sơn Ngọc","Gia Đình Anh Tùng","Gia Đình Anh 10 Tô","Gia Đình Anh 8 Khanh","Chị 9 Ngà","Gia Đình Chị Bé Hảo","Gia Đình Anh Tư Đường","Gia Đình Anh Hoàng Lan","Gia Đình Phú","Gia Đình Chị Yến","Gia Đình Anh Trường Hằng","Gia Đình Chị 2 Nhứt","Gia Đình Em Tí Anh","Gia Đình Bạn Trúc Đức","Gia Đình Em Hà An","Gia Đình Em 6 Bánh Mì","Gia Đình Chị 2 Cẩm Phụng","Gia Đình Cậu Mợ 9 Trúc","Gia Đình Em Dân Thùy","Gia Đình Em Bé Đức","Gia Đình Anh 3 Ánh","Gia Đình Chị 2 Liên Hoan","Gia Đình Mợ Cúc Lợi","Gia Đình Em Dương Nhung","Gia Đình Em Út Cúc","Gia Đình Em Minh Cúc","Gia Đình Em Tùng Hằng","Gia Đình Anh Bình Phú","Gia Đình Anh 8 Rót","Gia Đình Bé Nhỏ Vương","Gia Đình Bé Xíu","Gia Đình Em Lại","Gia Đình Em Tí Hoa","Gia Đình Em Hà Sim","Gia Đình Em Hằng Tâm","Gia Đình Em Hiền Thanh","Gia Đình Em Hưng","Gia Đình Em Hoài","Em Hậu Hà","Gia Đình Anh 10 Chảng","Gia Đình Anh Trung","Gia Đình Chị Bé Thơ","Chị Mận","Gia Đình Chị 2 Thi Tùng","Gia Đình Anh Tâm","Gia Đình Bình Tiên","Gia Đình Cháu Nghĩa My","Gia Đình Bé Trụi","Gia Đình Cậu Đích","Gia Đình Mai Hải","Gia Đình Bạn Lăng Mai","Gia Đình Cậu Mợ 7 Thanh","Gia Đình Nga","Gia Đình Anh Hùng","Gia Đình Em Tuyết Kỳ","Gia Đình Anh Hải Huệ","Gia Đình Anh Tuấn","Chị Diễm","Dì 6","Chị 2 Nữ","Gia Đình Chị Tuyết Nhi","Gia Đình Anh Lắc Vân","Gia Đình Anh Khoa","Gia Đình Cháu Bo","Dì 8","Gia Đình Em Vinh Hiếu","Gia Đình Em Sinh","Gia Đình Em Trọng Tư","Gia Đình Em Hương Phi","Gia Đình Em Vũ","Gia Đình Em Phong","Gia Đình Em Giang","Gia Đình Em Cảnh","Em Bé Nhỏ","Em Tí","Gia Đình Anh Trang","Gia Đình Chị Sương","Gia Đình Anh Thuận Thu","Gia Đình Em Khoa Út","Gia Đình Bạn Thúy","Gia Đình Cháu Sơn","Gia Đình Hòa Trang","Gia Đình Chị Dung Châu","Gia Đình Chị Nghệ","Gia Đình Chị Chinh","Gia Đình Em Chi Phương","Gia Đình Em Chuột Dung","Gia Đình Chị Quý Hiếu","Anh 6 Thương","Em Vợ Quẹo Cô Bảy","Chị 4 Trứng","Bạn Lánh","Gia Đình Em Thanh","Gia Đình Em Việt","Cháu Dì 4 Hoa","Gia Đình Anh 3 Huệ","Chị Ánh Bác 5 Giã","Chị Loan Bác 5 Giã","Bạn Trang","Gia Đình Anh Hậu","Gia Đình Anh Trục","Hoa Tâm Vạn Giã","Hưng Trà","Anh Tùng","Anh Phong","Anh Nhàn","Anh Tân","Anh Cường","Chị Châu","Tư Quý","Hòa","Tuấn","Yến","Nam","Anh Trước","Chị Sen","Chị Hằng","Chị Thưởng","Vợ Chồng Cô Ba Lê","Vợ Chồng Cháu Hồng","Cháu Thái","Cháu Trường","Vợ Chồng Em Khánh","Vợ Chồng Em Nhung","Vợ Chồng Cháu Được","Cháu Phúc","Vợ Chồng Em Dung","Vợ Chồng Cháu Huy","Cháu Hạnh","Em Phụng","Vợ Chồng Cháu Nhung","Vợ Chồng Em Khanh","Em Tùng","Vợ Chồng Em Huệ","Vợ Chồng Em Mười","Vợ Chồng 2 Lộc","Vợ Chồng Bé Dung","Vợ Chồng Cháu Dũng","Vợ Chồng Cháu Thoại","V/c Cháu 6 Kiều Khánh","V/c Cháu 7 Lùn","V/c Cháu Tí","V/c Cháu Bé","Chị Năm Sương","Cháu Đỏ","Cháu Bé","Vợ Chồng Chị Bảy Đào","Vợ Chồng Cháu Phú","Vợ Chồng Cháu Bé Xíu","V/c Anh Tám Tên","V/c Anh Mười Oanh","V/c Ba Phải","V/c 6 Sang","Chị 5 Hải","V/c 7 Quý","V/c Anh Mười","Chị Hai Đèn","V/c Cháu Oanh","V/c Cháu Quốc","V/c Chị Mến","Chị Tám Thường","Cháu Cường","V/c Cháu Hương","V/c Cháu Mai","V/c Cháu Trọng","V/c Chị Hai Xuyên","Chị 5 Thới","Cháu Hằng","Em Duyên","Em Lam","V/c Em Leo","V/c Anh Trang","V/c Anh Quân","V/c Em Lành","V/c Anh Quý Hà","V/c Anh Hải","V/c Anh Thi","V/c Cháu Vân","Chị Bảy Nê","V/c Tư Phúc","V/c Búp Thuận","V/c Ba Bìa","V/c Ba Trung","V/c Anh Mười Khôi","V/c Mười Anh","V/c Em Tuấn","V/c 7 Trung","V/c Cháu Hiệu","V/c Cháu Cảnh","Cháu Tùng","V/c Cháu Huệ Đạt","V/c Cháu Ngọc","Chị Chín Nga","V/c E Dũng Hạnh","V/c E Dũng Nhỏ","Em Trung","V/c Chú Mười Dũng","V/c Anh Dũng","V/c Cô Chín Thay","Cháu Thắm","V/c Cháu Định","V/c Cháu Thanh","V/c Em Tiến","V/c Em Sáu Tâm","V/c Cháu Son","V/c Cháu Võ","V/c Bạn Ánh","V/c Bạn Ngọt","V/c Bạn An","Anh Tèo Long","Chị Hoa","V/c Chị 10 Quý","V/c Em Hiền Ga","V/c Em Dung","V/c Em Nhung","V/c Bảy Ớt","V/c Chú Ba Tô","V/c Anh Tư Qúi","V/c Cháu Thủy","V/c Em Nghĩa","V/c Em Tâm","V/c Anh Ngà","Em Tuy","V/c Cậu Phương","V/c Em Thái","V/c Em Thùy","V/c Em Trình","V/c Em Thư","V/c Dì Chánh","V/c Em Vàng","V/c Cháu Chót Đỏ","Cô Mười","V/c Em Trung","V/c Em Tân","V/c Chị Thanh","V/c Em Mị","V/c Chị Nga Phú","Thím Tám Phượng","V/c Bạn Sinh","V/c Bạn Phượng","V/c Bạn Dũng","V/c Bạn Tâm","V/c Anh 6 Chỉnh","V/c Anh 6 Bé","V/c Em Thông","Bạn Mười","V/c Em Liễu","V/c Anh 7 Quí","V/c Chị Phương","V/c Sáu Thân","V/c Anh 5 Phong","Anh Thường","V/c Anh Chín Sơn","Anh 10 Lịu","V/c Sui Gia","Chị Tư Rành","V/c Em Nhiên","Chị Ba Quá","V/c Anh Thu","V/c Châu Điệu","V/c Cháu Vũ","V/c Cháu Xu","V/c Em Vinh Hùng","V/c Cháu Hải","V/c Cháu Mi","V/c Em Nở","Cô 5 Cúc","Thím 2 Mai","V/c Em Phương","V/c Em Phượng","Chị Hai Quyên","Chồng Chị Hai Quyên","Chị 3 Quyên","Chồng Chị Ba Quyên","Em Trai Quyên","Con Gái Chị Hai Quyên","Con Trai Chị Hai Quyên","Xuka Con Chị Ba Quyên","Con Dì 7 Quyên","Con Cậu 5 Quyên","Con Cậu 6","Chị 4 Oanh","Gia Đình Hiếu","Thuận Bỏ Trứng","Đạo Lụa","Gia Đình Anh Vương"];
+  const WISHES_TEMPLATES = [
+    'chúc trăm năm hạnh phúc',
+    'chúc đầu bạc răng long',
+    'gửi lời chúc trăm năm viên mãn',
+    'chúc tổ ấm tràn ngập tiếng cười',
+    'chúc tình yêu vĩnh cửu',
+    'chúc hôn nhân bền lâu',
+    'chúc duyên đẹp ý hợp',
+    'chúc vạn sự như ý',
+    'chúc sớm có tin vui',
+    'chúc bên nhau trọn đời',
+    'chúc cuộc sống lứa đôi viên mãn',
+    'chúc một mái ấm hạnh phúc',
+    'gửi đến hai bạn lời chúc tốt đẹp nhất',
+    'chúc hai bạn hạnh phúc viên mãn',
+    'chúc tình yêu ngọt ngào mãi mãi',
+    'chúc Đạt & Quyên trăm năm hạnh phúc',
+    'chúc bách niên giai lão',
+    'chúc tình yêu mãi đẹp như hôm nay'
+  ];
+  const WISHES_EMOJIS = ['💝','🌹','💕','🥂','💐','✨','🎉','💌','🌸','🍀','💖','🕊️','🌷','🎊','💞','💗','🌺'];
+  const _wsPick = a => a[Math.floor(Math.random()*a.length)];
+  const _wsShuffle = a => { const r=a.slice(); for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];} return r; };
+  const _wsEsc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const _wsCard = name => `<span class="ws-card"><span class="ws-emoji">${_wsPick(WISHES_EMOJIS)}</span><span class="ws-name">${_wsEsc(name)}</span><span class="ws-sep">·</span><span class="ws-msg">${_wsPick(WISHES_TEMPLATES)}</span></span>`;
+  (function initWishes(){
+    const top = document.querySelector('#wishesRowTop .wishes-track');
+    const bot = document.querySelector('#wishesRowBot .wishes-track');
+    if(!top || !bot) return;
+    const sh = _wsShuffle(WISHES_NAMES);
+    const half = Math.ceil(sh.length/2);
+    const a = sh.slice(0, half).map(_wsCard).join('');
+    const b = sh.slice(half).map(_wsCard).join('');
+    top.innerHTML = a + a;
+    bot.innerHTML = b + b;
+  })();
 
   // === Share buttons ===
   const SHARE_URL = window.location.href;
